@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.kesar.jetpackgank.util.EmptyUtils"/>
+        <import type="com.kesar.jetpackgank.util.DateUtil"/>
+        <import type="com.kesar.jetpackgank.Constant"/>
+        <variable
+            name="data"
+            type="com.kesar.jetpackgank.data.Gank"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivPic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/app_name"
+                    android:visibility="@{EmptyUtils.isEmpty(data.images)?View.GONE:View.VISIBLE}"
+                    app:imageUrl="@{EmptyUtils.isEmpty(data.images) ? null : data.images[0]}"
+                    />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/ivPic"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/ivPic"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:text="@{data.desc}"
+                    android:textSize="17sp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/ivPic"
+                    android:layout_toRightOf="@+id/ivPic"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="@{data.type}"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvType"
+                        android:layout_alignParentRight="true"
+                        android:textSize="12sp"
+                        android:text="@{DateUtil.format(data.createdAt, Constant.GANK_TIME_FORMAT, DateUtil.YYYY_MM_DD_HH_MM_SS)}"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
