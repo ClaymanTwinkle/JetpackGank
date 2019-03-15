@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.kesar.jetpackgank.R;
-import com.kesar.jetpackgank.databinding.SplashActivityBinding;
 import com.kesar.jetpackgank.base.ViewModelActivity;
+import com.kesar.jetpackgank.databinding.SplashActivityBinding;
 import com.kesar.jetpackgank.ui.main.MainActivity;
 
 import androidx.lifecycle.Observer;
@@ -27,6 +27,12 @@ public class SplashActivity extends ViewModelActivity<SplashViewModel> {
     @Override
     protected int getLayoutId() {
         return R.layout.splash_activity;
+    }
+
+    @Override
+    public void initContentView() {
+        setFullScreen(false, true);
+        super.initContentView();
     }
 
     @Override
