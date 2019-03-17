@@ -30,12 +30,6 @@ public class SplashActivity extends ViewModelActivity<SplashViewModel> {
     }
 
     @Override
-    public void initContentView() {
-        setFullScreen(false, true);
-        super.initContentView();
-    }
-
-    @Override
     protected void initView() {
         super.initView();
         final SplashActivityBinding viewDataBinding = getViewDataBinding();
@@ -50,6 +44,12 @@ public class SplashActivity extends ViewModelActivity<SplashViewModel> {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(mJumpMainActivityTask);
     }
 
     private void delayToJump(long delayMillis) {
